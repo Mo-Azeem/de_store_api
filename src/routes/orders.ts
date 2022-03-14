@@ -3,6 +3,7 @@ import { Router, Request, Response } from "express";
 import { parseToNumber, validateANumericField } from "../utils/validators";
 import { jwtVerfier } from "./middleware";
 import { validateOrderStatus } from "../utils/validators";
+import { getToday } from "../utils/utils";
 
 const store = new Order();
 
@@ -15,7 +16,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
     const new_order: IOrder = {
       user_id: validateANumericField(req.body.user_id, "user_id"),
       status: validateOrderStatus(req.body.status),
-      placing_date: new Date().toLocaleDateString(),
+      placing_date: getToday(),
       total: validateANumericField(req.body.total, "total"),
     };
     res.json(await store.create(new_order));

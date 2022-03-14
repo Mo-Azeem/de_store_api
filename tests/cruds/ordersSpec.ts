@@ -1,6 +1,6 @@
 import Order, {IOrder} from "../../src/models/orders";
 import User, { IUser } from "../../src/models/users";
-import { hash } from "../../src/utils/utils";
+import { getToday, hash } from "../../src/utils/utils";
 
 const userStore = new User()
 const orderStore = new Order()
@@ -25,7 +25,7 @@ describe("Testing Order's CRUDs", () => {
     it("Should create a new order in DB", async () => {
         order = await orderStore.create({
             user_id: (user as any).id,
-            placing_date: new Date().toLocaleDateString(),
+            placing_date: getToday(),
             total: 1,
             status: 'active'
         })

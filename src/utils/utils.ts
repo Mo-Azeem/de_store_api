@@ -17,6 +17,11 @@ export const compare = (password: string, hashed_password: string): boolean => {
   );
 };
 
+export const getToday = () => {
+  const date = new Date()
+  return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
+}
+
 export const signJWT = (user: IUser): string => {
   return jwt.sign(
     {
